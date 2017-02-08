@@ -8,7 +8,6 @@ from FOadmin.models import Profile
 class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
-    #verbose_name = 'Profile'
 
 class UserAdmin(UserAdmin):
     inlines = (ProfileInline, )
