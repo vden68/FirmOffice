@@ -14,3 +14,13 @@ class UserAdmin(UserAdmin):
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
+
+
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('fo_user_last_name', 'fo_user_name', 'fo_user_patronymic', 'fo_user_birthday')
+
+
+
+
+admin.site.register(Profile, ProfileAdmin)
