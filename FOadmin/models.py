@@ -1,11 +1,9 @@
-import os
 from django.db import models
 from django.contrib.auth.models import User
-from django.core.files.storage import FileSystemStorage
 
 #Профиль пользователя
 def fo_user_upload_path(instance, filename):
-    return 'profile/fo_user_{0}/{1}'.format(instance.user, filename)
+    return 'profile/fo_user/{0}/{1}'.format(instance.user, filename)
 
 class Profile(models.Model):
 
