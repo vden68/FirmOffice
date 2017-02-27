@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mptt',
+    'django_mptt_admin',
     'FOadmin',  # Раздел администратора
 ]
 
@@ -130,6 +132,9 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'media')
 MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
+
+MPTT_ADMIN_LEVEL_INDENT = 40
+
 
 print ('__file__='+__file__)
 print ('MEDIA_ROOT='+MEDIA_ROOT)

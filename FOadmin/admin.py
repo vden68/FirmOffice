@@ -1,8 +1,9 @@
 from django.contrib import admin
+from django_mptt_admin.admin import DjangoMpttAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from FOadmin.models import Profile
+from FOadmin.models import Profile,CompanyStructure, TestMptt
 
 
 class ProfileInline(admin.StackedInline):
@@ -34,5 +35,10 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 
+class CompanyStructureDjangoMpttAdmin(DjangoMpttAdmin):
+    #pass
+    list_display = ('title',)
+    item_label_field_name = 'title'
 
 admin.site.register(Profile, ProfileAdmin)
+admin.site.register(CompanyStructure, CompanyStructureDjangoMpttAdmin)
