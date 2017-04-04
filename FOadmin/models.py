@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 import mptt
+import uuid
 
 #Профиль пользователя
 def fo_user_upload_path(instance, filename):
@@ -47,7 +48,7 @@ class Profile(models.Model):
 
 #Структура компании
 class CompanyStructure(MPTTModel):
-    title = models.CharField('Название',max_length=100, unique=True)
+    title = models.CharField('Название',max_length=100, unique=True, default=uuid.uuid4())
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
                             verbose_name='Кому подчиняется')
     fo_department = models.ForeignKey('Department', on_delete=models.ProtectedError,
@@ -67,7 +68,7 @@ class CompanyStructure(MPTTModel):
         verbose_name_plural = 'Структура компании'
 
     def __str__(self):
-        return  '%s' % (self.title)
+        return  '%s %s' % (self.fo_department, self.fo_book_position)
 
 
 mptt.register(CompanyStructure)

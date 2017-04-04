@@ -36,8 +36,9 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class CompanyStructureDjangoMpttAdmin(DjangoMpttAdmin):
-    list_display = ('title','fo_department', 'fo_book_position',)
+    list_display = ('fo_department', 'fo_book_position',)
     item_label_field_name = 'title_for_admin'
+    exclude = ('title',)
 
 
 class ReferenceBookPositionAdmin(admin.ModelAdmin):
