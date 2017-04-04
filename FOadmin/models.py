@@ -48,12 +48,16 @@ class Profile(models.Model):
 #Структура компании
 class CompanyStructure(MPTTModel):
     title = models.CharField('Название',max_length=100, unique=True)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True, verbose_name='Кому подчиняется')
-    fo_book_position = models.ForeignKey('ReferenceBookPosition', on_delete=models.ProtectedError )
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
+                            verbose_name='Кому подчиняется')
+    fo_department = models.ForeignKey('Department', on_delete=models.ProtectedError,
+                                      verbose_name='Отдел', null=True, blank=True )
+    fo_book_position = models.ForeignKey('ReferenceBookPosition', on_delete=models.ProtectedError,
+                                         verbose_name='Должность', null=True, blank=True )
 
     @property
     def title_for_admin(self):
-        return "%s %s" % (self.title, self.fo_book_position)
+        return "%s %s" % (self.fo_department, self.fo_book_position)
 
     class MPTTMeta:
         order_insertion_by = ['title']
@@ -65,14 +69,13 @@ class CompanyStructure(MPTTModel):
     def __str__(self):
         return  '%s' % (self.title)
 
+
 mptt.register(CompanyStructure)
+
 
 #Справочник должностей
 class ReferenceBookPosition(models.Model):
     fo_position_name = models.CharField('Должность',max_length=100, unique=True)
-    #fo_company_structure = models.ForeignKey('CompanyStructure',
-    #                                         on_delete=models.ProtectedError,
-    #                                         related_name='fo_position')
 
     class Meta:
         verbose_name = 'Должность'
@@ -81,9 +84,18 @@ class ReferenceBookPosition(models.Model):
     def __str__(self):
         return '%s' % (self.fo_position_name)
 
-class TestMptt(models.Model):
-    name = models.CharField(max_length=50, unique=True, verbose_name='Наименование')
-    def __unicode__(self):
-        return self.name
+
+#Справочник отделов
+class Department(models.Model):
+    fo_department_name = models.CharField('Отдел', max_length=100, unique=True)
+
+    class Meta:
+        verbose_name = 'Отдел'
+        verbose_name_plural = 'Справочник отделов'
+
+    def __str__(self):
+        return '%s' % (self.fo_department_name)
+
+
 
 
