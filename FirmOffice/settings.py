@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mptt',
     'django_mptt_admin',
+    #'django.contrib.admin',
     'FOadmin',  # Раздел администратора
 ]
 
@@ -109,6 +111,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
+SUIT_CONFIG = {
+    'ADMIN_NAME': 'МП Ханты-Мансийскгаз (админ)'
+}
+
 
 LANGUAGE_CODE = 'ru-RU'
 
@@ -133,7 +139,7 @@ MEDIA_ROOT = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'media')
 MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = '/media/admin/'
 
-MPTT_ADMIN_LEVEL_INDENT = 40
+#MPTT_ADMIN_LEVEL_INDENT = 40
 
 
 print ('__file__='+__file__)

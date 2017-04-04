@@ -3,7 +3,7 @@ from django_mptt_admin.admin import DjangoMpttAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from FOadmin.models import Profile,CompanyStructure, TestMptt
+from FOadmin.models import Profile,CompanyStructure, ReferenceBookPosition
 
 
 class ProfileInline(admin.StackedInline):
@@ -36,9 +36,22 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class CompanyStructureDjangoMpttAdmin(DjangoMpttAdmin):
-    #pass
     list_display = ('title',)
     item_label_field_name = 'title'
+    #fields = ('title', 'parent')
+
+#class CompanyStructureAdmin(MPTTModelAdmin, SortableModelAdmin):
+    #mptt_level_indent = 20
+    #list_display = ('title',)
+                    #'slug', 'is_active')
+    #list_editable = ('is_active',)
+
+    sortable = 'order'
+class ReferenceBookPositionAdmin(admin.ModelAdmin):
+    list_display = ('fo_position_name',)
+
 
 admin.site.register(Profile, ProfileAdmin)
+#admin.site.register(CompanyStructure, CompanyStructureAdmin)
+admin.site.register(ReferenceBookPosition, ReferenceBookPositionAdmin)
 admin.site.register(CompanyStructure, CompanyStructureDjangoMpttAdmin)

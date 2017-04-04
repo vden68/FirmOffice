@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from mptt.models import MPTTModel, TreeForeignKey
+from mptt.fields import TreeForeignKey
+from mptt.models import MPTTModel
 import mptt
 
 #Профиль пользователя
@@ -43,12 +44,11 @@ class Profile(models.Model):
         verbose_name_plural = 'Профили пользователей'
         ordering = ['fo_user_last_name']
 
+
+#Структура компании
 class CompanyStructure(MPTTModel):
     title = models.CharField('Название',max_length=100, unique=True)
-    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True)
-
-    def __unicode__(self):
-        return self.title
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True, verbose_name='Кому подчиняется')
 
     class MPTTMeta:
         order_insertion_by = ['title']
@@ -57,7 +57,24 @@ class CompanyStructure(MPTTModel):
         verbose_name = 'Структура компании'
         verbose_name_plural = 'Структура компании'
 
+    def __str__(self):
+        return  self.title
+
 mptt.register(CompanyStructure)
+
+#Справочник должностей
+class ReferenceBookPosition(models.Model):
+    fo_position_name = models.CharField('Должность',max_length=100, unique=True)
+    fo_company_structure = models.ForeignKey('CompanyStructure',
+                                             on_delete=models.ProtectedError,
+                                             related_name='fo_position')
+
+    class Meta:
+        verbose_name = 'Должность'
+        verbose_name_plural = 'Справочник должностей'
+
+    def __str__(self):
+        return '%s' % (self.fo_position_name)
 
 class TestMptt(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name='Наименование')
