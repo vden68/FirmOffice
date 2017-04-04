@@ -49,6 +49,11 @@ class Profile(models.Model):
 class CompanyStructure(MPTTModel):
     title = models.CharField('Название',max_length=100, unique=True)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True, verbose_name='Кому подчиняется')
+    fo_book_position = models.ForeignKey('ReferenceBookPosition', on_delete=models.ProtectedError )
+
+    @property
+    def title_for_admin(self):
+        return "%s %s" % (self.title, self.fo_book_position)
 
     class MPTTMeta:
         order_insertion_by = ['title']
@@ -58,16 +63,16 @@ class CompanyStructure(MPTTModel):
         verbose_name_plural = 'Структура компании'
 
     def __str__(self):
-        return  self.title
+        return  '%s' % (self.title)
 
 mptt.register(CompanyStructure)
 
 #Справочник должностей
 class ReferenceBookPosition(models.Model):
     fo_position_name = models.CharField('Должность',max_length=100, unique=True)
-    fo_company_structure = models.ForeignKey('CompanyStructure',
-                                             on_delete=models.ProtectedError,
-                                             related_name='fo_position')
+    #fo_company_structure = models.ForeignKey('CompanyStructure',
+    #                                         on_delete=models.ProtectedError,
+    #                                         related_name='fo_position')
 
     class Meta:
         verbose_name = 'Должность'

@@ -36,17 +36,10 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class CompanyStructureDjangoMpttAdmin(DjangoMpttAdmin):
-    list_display = ('title',)
-    item_label_field_name = 'title'
-    #fields = ('title', 'parent')
+    list_display = ('title', 'fo_book_position',)
+    item_label_field_name = 'title_for_admin'
 
-#class CompanyStructureAdmin(MPTTModelAdmin, SortableModelAdmin):
-    #mptt_level_indent = 20
-    #list_display = ('title',)
-                    #'slug', 'is_active')
-    #list_editable = ('is_active',)
 
-    sortable = 'order'
 class ReferenceBookPositionAdmin(admin.ModelAdmin):
     list_display = ('fo_position_name',)
 
