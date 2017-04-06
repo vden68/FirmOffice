@@ -4,6 +4,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
 from FOadmin.models import Profile,CompanyStructure, ReferenceBookPosition, Department, WorkingGroup
+from FOadmin.models import WorkingGroupPartner
 
 
 class ProfileInline(admin.StackedInline):
@@ -48,8 +49,13 @@ class ReferenceBookPositionAdmin(admin.ModelAdmin):
 class DepartmentAdmin(admin.ModelAdmin):
     pass
 
+
+class WorkingGroupPartnerInline(admin.TabularInline):
+    model = WorkingGroupPartner
+
 class WorkingGroupAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('fo_working_group_name', 'fo_auto_now_add', 'fo_working_group_profile',)
+    inlines = [WorkingGroupPartnerInline]
 
 admin.site.register(Profile, ProfileAdmin)
 #admin.site.register(CompanyStructure, CompanyStructureAdmin)

@@ -118,6 +118,11 @@ class WorkingGroup(models.Model):
         return '%s' % (self.fo_working_group_name)
 
 
+class WorkingGroupPartner(models.Model):
+    fo_working_group = models.ForeignKey('WorkingGroup', on_delete=models.ProtectedError,
+                                         verbose_name='Рабочая группа')
+    fo_working_group_partner_profile = models.ForeignKey('Profile', on_delete=models.ProtectedError,
+                                                         verbose_name='Участники группы ФИО')
 
 
 
