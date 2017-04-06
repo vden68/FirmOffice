@@ -45,16 +45,22 @@ class Profile(models.Model):
         verbose_name_plural = 'Профили пользователей'
         ordering = ['fo_user_last_name']
 
+    def __str__(self):
+        return '%s %s. %s.' % (self.fo_user_last_name, self.fo_user_name.upper()[0],
+                               self.fo_user_patronymic.upper()[0])
+
 
 #Структура компании
 class CompanyStructure(MPTTModel):
-    title = models.CharField('Название',max_length=100, unique=True, default=uuid.uuid4())
+    title = models.CharField('Название',max_length=100, unique=True, default=uuid.uuid4)
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children', db_index=True,
                             verbose_name='Кому подчиняется')
     fo_department = models.ForeignKey('Department', on_delete=models.ProtectedError,
                                       verbose_name='Отдел', null=True, blank=True )
     fo_book_position = models.ForeignKey('ReferenceBookPosition', on_delete=models.ProtectedError,
                                          verbose_name='Должность', null=True, blank=True )
+    fo_profile = models.ForeignKey('Profile', on_delete=models.ProtectedError,
+                                   verbose_name='ФИО', null=True, blank=True )
 
     @property
     def title_for_admin(self):
