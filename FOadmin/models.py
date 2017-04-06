@@ -46,7 +46,7 @@ class Profile(models.Model):
         ordering = ['fo_user_last_name']
 
     def __str__(self):
-        return '%s %s. %s.' % (self.fo_user_last_name, self.fo_user_name.upper()[0],
+        return '%s %s. %s.' % (self.fo_user_last_name.title(), self.fo_user_name.upper()[0],
                                self.fo_user_patronymic.upper()[0])
 
 
@@ -64,7 +64,7 @@ class CompanyStructure(MPTTModel):
 
     @property
     def title_for_admin(self):
-        return "%s %s" % (self.fo_department, self.fo_book_position)
+        return "%s %s %s" % (self.fo_department, self.fo_book_position, self.fo_profile)
 
     class MPTTMeta:
         order_insertion_by = ['title']
@@ -74,7 +74,7 @@ class CompanyStructure(MPTTModel):
         verbose_name_plural = 'Структура компании'
 
     def __str__(self):
-        return  '%s %s' % (self.fo_department, self.fo_book_position)
+        return  '%s %s %s' % (self.fo_department, self.fo_book_position, self.fo_profile)
 
 
 mptt.register(CompanyStructure)
