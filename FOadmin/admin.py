@@ -3,7 +3,7 @@ from django_mptt_admin.admin import DjangoMpttAdmin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 
-from FOadmin.models import Profile,CompanyStructure, ReferenceBookPosition, Department
+from FOadmin.models import Profile,CompanyStructure, ReferenceBookPosition, Department, WorkingGroup
 
 
 class ProfileInline(admin.StackedInline):
@@ -48,8 +48,12 @@ class ReferenceBookPositionAdmin(admin.ModelAdmin):
 class DepartmentAdmin(admin.ModelAdmin):
     pass
 
+class WorkingGroupAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(Profile, ProfileAdmin)
 #admin.site.register(CompanyStructure, CompanyStructureAdmin)
 admin.site.register(ReferenceBookPosition, ReferenceBookPositionAdmin)
 admin.site.register(CompanyStructure, CompanyStructureDjangoMpttAdmin)
 admin.site.register(Department, DepartmentAdmin)
+admin.site.register(WorkingGroup, WorkingGroupAdmin)

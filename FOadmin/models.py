@@ -103,6 +103,22 @@ class Department(models.Model):
     def __str__(self):
         return '%s' % (self.fo_department_name)
 
+#Рабочая группа
+class WorkingGroup(models.Model):
+    fo_working_group_name = models.CharField('Рабочая группа', max_length=100, unique=True)
+    fo_auto_now_add = models.DateField('Дата создания группы', auto_now_add=True)
+    fo_working_group_profile = models.ForeignKey('Profile', on_delete=models.ProtectedError,
+                                                 verbose_name='Кто создал ФИО')
+
+    class Meta:
+        verbose_name = 'Рабочая группа'
+        verbose_name_plural = 'Рабочии группы'
+
+    def __str__(self):
+        return '%s' % (self.fo_working_group_name)
+
+
+
 
 
 
