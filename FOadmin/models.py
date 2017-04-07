@@ -39,6 +39,7 @@ class Profile(models.Model):
     fo_user_type_phone_4 = models.CharField(max_length=2, choices=PHONE_TYPE, default=WORKPHONE, verbose_name='Тип телефона')
     fo_user_phone_4 = models.CharField(max_length=20, default='-', verbose_name='№ телефона')
     fo_user_photo = models.ImageField(upload_to=fo_user_upload_path, blank=True, verbose_name='Фото пользователя')
+    fo_right_create_working_group = models.BooleanField('Создание рабочей группы', default=False)
 
     class Meta:
         verbose_name = 'Профиль пользователя'

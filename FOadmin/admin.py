@@ -31,6 +31,7 @@ class ProfileAdmin(admin.ModelAdmin):
                                           ('fo_user_type_phone_4', 'fo_user_phone_4')
                                             ,'fo_user_photo'
                                           ]}),
+        ('Права пользователя', {'fields': [('fo_right_create_working_group')]}),
 
     ]
 
