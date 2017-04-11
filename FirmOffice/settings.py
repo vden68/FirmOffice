@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django_mptt_admin',
     #'django.contrib.admin',
     'FOadmin',  # Раздел администратора
+    'FoNotice'
 ]
 
 MIDDLEWARE = [
