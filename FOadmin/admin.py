@@ -31,14 +31,14 @@ class ProfileAdmin(admin.ModelAdmin):
                                           ('fo_user_type_phone_4', 'fo_user_phone_4')
                                             ,'fo_user_photo'
                                           ]}),
-        ('Права пользователя', {'fields': [('fo_right_create_working_group')]}),
+        ('Права пользователя', {'fields': [('fo_right_create_working_group', 'fo_right_invite_any_user_workgroup')]}),
 
     ]
 
 
 
 class CompanyStructureDjangoMpttAdmin(DjangoMpttAdmin):
-    list_display = ('fo_department', 'fo_book_position',)
+    list_display = ('fo_department', 'fo_book_position', 'fo_profile',)
     item_label_field_name = 'title_for_admin'
     exclude = ('title',)
 

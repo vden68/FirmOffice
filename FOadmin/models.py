@@ -40,6 +40,7 @@ class Profile(models.Model):
     fo_user_phone_4 = models.CharField(max_length=20, default='-', verbose_name='№ телефона')
     fo_user_photo = models.ImageField(upload_to=fo_user_upload_path, blank=True, verbose_name='Фото пользователя')
     fo_right_create_working_group = models.BooleanField('Создание рабочей группы', default=False)
+    fo_right_invite_any_user_workgroup = models.BooleanField('Пригласить любого пользователя в рабочую группу', default=False)
 
     class Meta:
         verbose_name = 'Профиль пользователя'
@@ -118,12 +119,22 @@ class WorkingGroup(models.Model):
     def __str__(self):
         return '%s' % (self.fo_working_group_name)
 
-
+#Пользователи рабочей группы
 class WorkingGroupPartner(models.Model):
     fo_working_group = models.ForeignKey('WorkingGroup', on_delete=models.ProtectedError,
                                          verbose_name='Рабочая группа')
     fo_working_group_partner_profile = models.ForeignKey('Profile', on_delete=models.ProtectedError,
                                                          verbose_name='Участники группы ФИО')
+    fo_working_group_admin =  models.BooleanField('Администратор группы', default=False)
+    fo_right_invite_group = models.BooleanField('Приглашать в группу', default=False)
+
+    class Meta:
+        verbose_name = 'Участник рабочей группы'
+        verbose_name_plural = 'Участники рабочей группы'
+
+    def __str__(self):
+        return '%s' % (self.fo_working_group_partner_profile)
+
 
 
 
