@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'FoNotice',#Уведомления
     'FoBusinessProcess',#Бизнес Процессы
     'FoCounterparty', #Контрагенты
+    'FoSite', #Сайт наружу
 ]
 
 MIDDLEWARE = [
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'FirmOffice.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

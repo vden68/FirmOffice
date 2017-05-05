@@ -1,0 +1,13 @@
+{% extends 'site/base.html' %}
+
+{% block title %}Пример работы с системой ЕСИА через OAuth2{% endblock %}
+
+{% block body_block %}
+Пройти аутентификацию в системе ЕСИА:
+<br/>
+<ul>
+    <li>
+        <a href="{% url 'oauth2login' %}">Через протокол OAuth2</a>
+    </li>
+</ul>
+{% endblock %}

@@ -1,3 +1,11 @@
 from django.contrib import admin
+from FoCounterparty.models import LegalEntity
 
-# Register your models here.
+
+
+class LegalEntityAdmin(admin.ModelAdmin):
+    pass
+
+
+
+admin.site.register(LegalEntity, LegalEntityAdmin)

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title> {% block title %}Ханты-Мансийскгаз!{% endblock %}</title>
+    </head>
+
+    <body>
+        <div>
+            {% block body_block %}{% endblock %}
+        </div>
+    </body>
+</html>
